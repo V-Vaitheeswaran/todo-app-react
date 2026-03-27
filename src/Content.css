@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+  background: #0d0d0d;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Container */
+.container {
+  width: 520px;
+  margin: 60px auto;
+  background: #181818;
+  padding: 25px;
+  border-radius: 14px;
+  color: #f1f1f1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Add section improvements */
+.add-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-section input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #262626;
+  color: white;
+  outline: none;
+}
+
+.add-section button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  background: #00c853;   /* ✅ green */
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.add-section button:hover {
+  background: #00e676;   /* lighter green on hover */
+}
+/* Header spacing fix */
+.row.header {
+  display: grid;
+  grid-template-columns: 40px 1fr 80px 140px;
+  align-items: center;
+  padding: 10px 5px;
+}
+
+/* Rows as grid (BIG upgrade 🔥) */
+.row {
+  display: grid;
+  grid-template-columns: 40px 1fr 80px 140px;
+  align-items: center;
+  background: #202020;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+/* Actions container */
+.row div {
+  display: flex;
+  gap: 6px;
+}
+
+/* Buttons */
+.row button {
+  flex: 1;
+  padding: 6px 8px;
+  font-size: 12px;
+}
+
+/* Clear button */
+.clear-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #ff5252;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.clear-btn:hover {
+  background: #ff1744;
+}
+
+/* Empty state (NEW 🔥) */
+.empty {
+  text-align: center;
+  color: #777;
+  margin-top: 20px;
+}
