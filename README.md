@@ -1,6 +1,6 @@
 # 📝 Todo App (React)
 
-A simple and clean Todo application built using React.
+A clean and modern Todo application built using React.
 
 ## 🚀 Features
 - ➕ Add tasks
@@ -12,10 +12,14 @@ A simple and clean Todo application built using React.
 - React (useState)
 - CSS
 
-## 📸 Screenshot
-(Add screenshot here later)
+## 📸 Preview
+![App Screenshot](./screenshots/screenshot.png)
+
+## ⚡ How to Run
+npm install
+npm start
 
 ## 🔮 Future Improvements
-- localStorage support
-- Better UI
-- Search feature
+- localStorage persistence
+- Search functionality
+- Better UI animations

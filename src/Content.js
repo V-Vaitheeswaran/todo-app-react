@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Content.css";
+import AddTodo from "./AddTodo";
+import TodoList from "./TodoList";
 
 const initialTodos = [
   { id: 1, task: "Learn React", time: 9, completed: false },
@@ -22,11 +24,9 @@ const Content = () => {
   const [time, setTime] = useState("");
   const [editId, setEditId] = useState(null);
 
-  function handleDelete(id) {
-    settodo(todolist.filter((j) => j.id !== id));
-  }
+  const handleDelete = (id) => settodo(todolist.filter((j) => j.id !== id));
 
-  function handleAddTodo() {
+  const handleAddTodo = () => {
     if (task.trim() === "" || !time) return;
 
     if (editId) {
@@ -47,24 +47,22 @@ const Content = () => {
 
     setTask("");
     setTime("");
-  }
+  };
 
-  function handleEdit(todo) {
+  const handleEdit = (todo) => {
     setTask(todo.task);
     setTime(todo.time);
     setEditId(todo.id);
-  }
+  };
 
-  function handleClearAll() {
-    settodo([]);
-  }
+  const handleClearAll = () => settodo([]);
 
-  function toggleComplete(id) {
+  const toggleComplete = (id) => {
     const updated = todolist.map((t) =>
       t.id === id ? { ...t, completed: !t.completed } : t,
     );
     settodo(updated);
-  }
+  };
 
   useEffect(() => {
     try {
@@ -78,65 +76,21 @@ const Content = () => {
     <div className="container">
       <h2 className="title">Todo List</h2>
 
-      {/* Add / Edit */}
-      <div className="add-section">
-        <input
-          placeholder="Task"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
-        />
-        <input
-          placeholder="Time"
-          type="number"
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-        />
-        <button onClick={handleAddTodo}>{editId ? "Update" : "➕"}</button>
-      </div>
+      <AddTodo
+        task={task}
+        setTask={setTask}
+        time={time}
+        setTime={setTime}
+        onAddTodo={handleAddTodo}
+        editId={editId}
+      />
 
-      {/* Header */}
-      <div className="row header">
-        <span>#</span>
-        <span>Task</span>
-        <span>Time</span>
-        <span>Actions</span>
-      </div>
-
-      {/* List */}
-      {todolist.map((todo, index) => (
-        <div className="row" key={todo.id}>
-          <span>{index + 1}</span>
-
-          <span
-            style={{
-              textDecoration: todo.completed ? "line-through" : "none",
-              color: todo.completed ? "#888" : "#f1f1f1",
-            }}
-          >
-            {todo.task}
-          </span>
-
-          <span>{todo.time}</span>
-
-          <div>
-            <button
-              onClick={() => toggleComplete(todo.id)}
-              className={todo.completed ? "completed-btn" : "mark-complete-btn"}
-            >
-              {todo.completed ? "Undo" : "Complete"}
-            </button>
-            <button onClick={() => handleEdit(todo)} className="edit-btn">
-              Edit
-            </button>
-            <button
-              onClick={() => handleDelete(todo.id)}
-              className="delete-btn"
-            >
-              Delete
-            </button>
-          </div>
-        </div>
-      ))}
+      <TodoList
+        todolist={todolist}
+        onToggleComplete={toggleComplete}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
 
       <div>
         <button onClick={handleClearAll} className="clear-btn">
