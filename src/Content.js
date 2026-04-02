@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Content.css";
 
+const initialTodos = [
+  { id: 1, task: "Learn React", time: 9, completed: false },
+  { id: 2, task: "Revise HTML/CSS", time: 10, completed: false },
+  { id: 3, task: "Practice React", time: 11, completed: false },
+];
+
 const Content = () => {
-  const [todolist, settodo] = useState([
-    { id: 1, task: "Learn React", time: 9, completed: false },
-    { id: 2, task: "Revise HTML/CSS", time: 10, completed: false },
-    { id: 3, task: "Practice React", time: 11, completed: false },
-  ]);
+  const [todolist, settodo] = useState(() => {
+    try {
+      const saved = localStorage.getItem("todo_list");
+      return saved ? JSON.parse(saved) : initialTodos;
+    } catch (error) {
+      console.warn("Error reading localStorage", error);
+      return initialTodos;
+    }
+  });
 
   const [task, setTask] = useState("");
   const [time, setTime] = useState("");
@@ -21,7 +31,7 @@ const Content = () => {
 
     if (editId) {
       const updated = todolist.map((t) =>
-        t.id === editId ? { ...t, task, time: Number(time) } : t
+        t.id === editId ? { ...t, task, time: Number(time) } : t,
       );
       settodo(updated);
       setEditId(null);
@@ -45,16 +55,24 @@ const Content = () => {
     setEditId(todo.id);
   }
 
-  function handleClearAll(){
+  function handleClearAll() {
     settodo([]);
   }
 
   function toggleComplete(id) {
     const updated = todolist.map((t) =>
-      t.id === id ? { ...t, completed: !t.completed } : t
+      t.id === id ? { ...t, completed: !t.completed } : t,
     );
     settodo(updated);
   }
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("todo_list", JSON.stringify(todolist));
+    } catch (error) {
+      console.warn("Error writing localStorage", error);
+    }
+  }, [todolist]);
 
   return (
     <div className="container">
@@ -73,9 +91,7 @@ const Content = () => {
           value={time}
           onChange={(e) => setTime(e.target.value)}
         />
-        <button onClick={handleAddTodo}>
-          {editId ? "Update" : "➕"}
-        </button>
+        <button onClick={handleAddTodo}>{editId ? "Update" : "➕"}</button>
       </div>
 
       {/* Header */}
@@ -111,9 +127,10 @@ const Content = () => {
       ))}
 
       <div>
-        <button onClick={handleClearAll} className="clear-btn">Clear All</button>
+        <button onClick={handleClearAll} className="clear-btn">
+          Clear All
+        </button>
       </div>
-    
     </div>
   );
 };
