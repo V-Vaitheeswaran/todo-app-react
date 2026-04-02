@@ -108,10 +108,9 @@ const Content = () => {
           <span>{index + 1}</span>
 
           <span
-            onClick={() => toggleComplete(todo.id)}
             style={{
               textDecoration: todo.completed ? "line-through" : "none",
-              cursor: "pointer",
+              color: todo.completed ? "#888" : "#f1f1f1",
             }}
           >
             {todo.task}
@@ -120,8 +119,21 @@ const Content = () => {
           <span>{todo.time}</span>
 
           <div>
-            <button onClick={() => handleEdit(todo)}>Edit</button>
-            <button onClick={() => handleDelete(todo.id)}>Delete</button>
+            <button
+              onClick={() => toggleComplete(todo.id)}
+              className={todo.completed ? "completed-btn" : "mark-complete-btn"}
+            >
+              {todo.completed ? "Undo" : "Complete"}
+            </button>
+            <button onClick={() => handleEdit(todo)} className="edit-btn">
+              Edit
+            </button>
+            <button
+              onClick={() => handleDelete(todo.id)}
+              className="delete-btn"
+            >
+              Delete
+            </button>
           </div>
         </div>
       ))}

@@ -6,13 +6,14 @@ body {
 
 /* Container */
 .container {
-  width: 520px;
-  margin: 60px auto;
+  width: min(700px, 90vw);
+  margin: 40px auto;
   background: #181818;
   padding: 25px;
   border-radius: 14px;
   color: #f1f1f1;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
 }
 
 /* Add section improvements */
@@ -36,7 +37,7 @@ body {
   padding: 10px 16px;
   border-radius: 8px;
   font-weight: bold;
-  background: #00c853;   /* ✅ green */
+  background: #00c853; /* ✅ green */
   color: white;
   border: none;
   cursor: pointer;
@@ -44,12 +45,12 @@ body {
 }
 
 .add-section button:hover {
-  background: #00e676;   /* lighter green on hover */
+  background: #00e676; /* lighter green on hover */
 }
 /* Header spacing fix */
 .row.header {
   display: grid;
-  grid-template-columns: 40px 1fr 80px 140px;
+  grid-template-columns: 40px minmax(150px, 1fr) 80px minmax(180px, 1fr);
   align-items: center;
   padding: 10px 5px;
 }
@@ -57,18 +58,34 @@ body {
 /* Rows as grid (BIG upgrade 🔥) */
 .row {
   display: grid;
-  grid-template-columns: 40px 1fr 80px 140px;
+  grid-template-columns: 40px minmax(150px, 1fr) 80px minmax(180px, 1fr);
   align-items: center;
   background: #202020;
   padding: 12px;
   margin-top: 10px;
   border-radius: 10px;
+  gap: 8px;
+  overflow: hidden;
+}
+
+/* Text overflow handling */
+.row span:nth-child(2) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Actions container */
 .row div {
   display: flex;
   gap: 6px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.row button {
+  min-width: 62px;
+  white-space: nowrap;
 }
 
 /* Buttons */
@@ -76,6 +93,46 @@ body {
   flex: 1;
   padding: 6px 8px;
   font-size: 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.mark-complete-btn {
+  background: #00c853;
+  color: white;
+}
+
+.mark-complete-btn:hover {
+  background: #00e676;
+}
+
+.completed-btn {
+  background: #4caf50;
+  color: white;
+}
+
+.completed-btn:hover {
+  background: #66bb6a;
+}
+
+.edit-btn {
+  background: #2196f3;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #42a5f5;
+}
+
+.delete-btn {
+  background: #f44336;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #ef5350;
 }
 
 /* Clear button */
